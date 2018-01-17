@@ -1,0 +1,20 @@
+{
+  "parser"  : "babel-eslint",  
+  "plugins": [
+    "babel",    
+    "promise"
+  ],  
+  "globals" : {
+    "__DEV__"      : false,
+    "__PROD__"     : false,
+    "__DEBUG__"    : false,
+    "__COVERAGE__" : false,
+    "__BASENAME__" : false
+  },
+  "rules": {
+    "semi" : [2, "never"],
+    "max-len": [0, 120, 4],
+    "generator-star-spacing": 0,
+    "babel/generator-star-spacing": 1   
+  }
+}

@@ -1,0 +1,23 @@
+FROM node:6.10.3
+MAINTAINER Ambar "http://ambar.cloud"
+
+RUN apt-get update && apt-get install -y wget
+
+# Set a timezone
+ENV TZ=UTC
+RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
+
+# Create app directory
+RUN mkdir -p /usr/src/app
+WORKDIR /usr/src/app
+
+# Bundle app source
+COPY . /usr/src/app
+RUN rm -rf /usr/src/app/src/*
+
+CMD node dist --mongoDbUrl=${db} --dockerRepo=${dockerRepo} --apiUrl=${api} --elasticSearchUrl=${es} --redisHost=${redis} --mode=${mode} --pipelineCount=${pipelineCount} --rabbitHost=${rabbit} --dropboxRedirectUri=${dropboxRedirectUri} --dropboxClientId=${dropboxClientId} --feUrl=${fe} --crawlerCount=${crawlerCount} --defaultAccountLangAnalyzer=${defaultLangAnalyzer} --analyticsToken=${analyticsToken} --auth=${auth} --ocrPdfMaxPageCount=${ocrPdfMaxPageCount} --ocrPdfSymbolsPerPageThreshold=${ocrPdfSymbolsPerPageThreshold} --nerEnabled=${nerEnabled} --uiLang=${uiLang} --preserveOriginals=${preserveOriginals}
+
+EXPOSE 8080
+
+HEALTHCHECK --interval=5s --timeout=30s --retries=50 \
+  CMD curl -f localhost:8080/api || exit 1

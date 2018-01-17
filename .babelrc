@@ -1,0 +1,29 @@
+{
+  "presets": [
+    "es2015",
+    "stage-0",
+    "babel-preset-flow"
+  ],
+  "plugins": [
+    [
+      "remove-code",
+      {
+        "debugger": true,
+        "var": [
+          "ENTERPEDIT"
+        ],
+        "export": [
+          "ENTERPEDIT"
+        ],
+        "import": [
+          "ENTERPEDIT"
+        ],
+        "function": [
+          "ENTERPEDIT"
+        ]
+      }
+    ]
+  ],
+  "sourceMaps": true,
+  "retainLines": true
+}
